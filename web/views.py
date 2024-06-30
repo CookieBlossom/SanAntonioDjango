@@ -1,18 +1,18 @@
 from django.shortcuts import render
-from carrito.models import ShoppingCart  # Asumiendo que ShoppingCart es tu modelo de carrito en models.py
+from carrito.models import ShoppingCart
+from django.contrib.auth.decorators import login_required  # Asumiendo que ShoppingCart es tu modelo de carrito en models.py
 from carrito.carrito import Cart  # Ajusta la importación según la estructura de tu proyecto
 
+@login_required
 def home(request):
     user = request.user
-    if user.is_authenticated:
-        try:
-            carrito_db = ShoppingCart.objects.get(user=user)
-            carrito_memoria = Cart(user=user)
-        except ShoppingCart.DoesNotExist:
-            carrito_db = ShoppingCart.objects.create(user=user)
-    else:
-        carrito_db = None
-        carrito_memoria = Cart(user=None)
+    
+    try:
+        carrito_db = ShoppingCart.objects.get(user=user)
+    except ShoppingCart.DoesNotExist:
+        carrito_db = ShoppingCart.objects.create(user=user)
+    
+    carrito_memoria = Cart(user=user)
 
     context = {
         'user': user,

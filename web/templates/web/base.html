@@ -1,11 +1,30 @@
 <html>
     <head>
         {% load static %}
+        <!-- Bootstrap -->
+        <link href="{% static 'web/vendor/bootstrap/css/bootstrapp.min.css' %}" rel="stylesheet">
+
     </head>
     <body>
+        <!-- home.html -->
+        {% if user.is_authenticated %}
+            <!-- Mostrar el carrito de compras -->
+            <div class="carrito">
+                <h3>Carrito de compras</h3>
+                <!-- Ejemplo de iteración sobre los productos del carrito en memoria -->
+                <ul>
+                    {% for item in carrito_memoria.obtener_items %}
+                        <li>{{ item.product.nombre }} - Cantidad: {{ item.cantidad }} - Precio: ${{ item.precio_total }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}        
         {% block content %}
 
 
         {% endblock %}
+        <!-- Bootstrap -->
+        <script src="{% static 'web/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
     </body>
 </html>
