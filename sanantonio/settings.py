@@ -51,7 +51,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'web', 'templates'),
-            os.path.join(BASE_DIR, 'web', 'templates', 'accounts'),            
+            os.path.join(BASE_DIR, 'web', 'templates', 'accounts'),
+            os.path.join(BASE_DIR, 'web', 'templates', 'products'),               
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -110,12 +111,13 @@ USE_I18N = True
 USE_TZ = True
 
 LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'web/static'),
 ]

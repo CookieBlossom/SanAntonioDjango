@@ -21,4 +21,9 @@ class CartItem(models.Model):
     price = models.FloatField()
 
     def __str__(self):
-        return f'{self.user.username} - {self.product.name}'
+        return f'{self.product}'
+    
+    @property
+    def total_price(self):
+        total_price = self.quantity * self.price
+        return total_price

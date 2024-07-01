@@ -1,9 +1,5 @@
-// Suponiendo que tienes un formulario o un botón que captura la cantidad seleccionada
 function agregarAlCarrito(productoId) {
-    // Supongamos que aquí obtienes la cantidad seleccionada desde el HTML
     var cantidadSeleccionada = document.getElementById('cantidadSeleccionada').value;
-
-    // Luego, envías estos datos al backend usando AJAX
     $.ajax({
         type: 'POST',
         url: '/agregar-al-carrito/',  // Ruta donde manejas la lógica en Django

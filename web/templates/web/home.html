@@ -3,7 +3,43 @@
 {% load static %}
 
 {% block content %}
-    <div>
-        soy wekita
-    </div>
+    <!--PROMOCION-->
+    <section>
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'web/images/promocion.jpg' %}" class="d-block w-100" alt="promocion">
+                <div class="carousel-caption d-none d-md-block">
+                <p>LA NUEVA COLECCION DE ZAPATILLAS HA LLEGADO YA!!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+            <!--CATEGORIAS-->
+            <div class="title-prom"> CATEGORIAS </div>
+            <section id="showCategories" class="row row-cols-lg-4 row-cols-md-4 row-cols-sm-2">
+            </section>
+            <!--CATEGORIAS-->
+            <!--MARCAS-->
+            <div class="title-prom"> NUESTRAS MARCAS </div>
+            <section id="showBrands" class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+            </section>
+            <!--MARCAS-->  
+            <!--GENERO-->
+            <section class="col">
+                <div class="genre" id="showGenre">
+                    <div class="row">
+                        <img src="{% static 'web/images/genres/Female.png' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="row">
+                        <img src="{% static 'web/images/genres/Male.png' %}" alt="" class="img-fluid">
+                    </div>
+                    <div class="row">
+                        <img src="{% static 'web/images/genres/Unisex.png' %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </section>
+            <!--GENERO--> 
+    <!--PROMOCION-->
+    <script src="{% static 'web/js/web.js' %}" type="module"></script>
 {% endblock %}

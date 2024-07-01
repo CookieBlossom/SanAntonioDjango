@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),  # URL para el panel de administración de Django
     path('', views.home, name="home"),  # URL para la vista principal de tu aplicación
-    # Ejemplo de incluir URLs de otra aplicación llamada 'accounts'
     path('web/', include('web.urls')),  # Reemplaza 'accounts.urls' con el nombre de tu aplicación y archivo 'urls.py'
 ]
 
