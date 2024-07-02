@@ -1,7 +1,7 @@
 # SanAntonioDjango
-  pip install virtualenv
-  python3 -m venv myenv (Linux) / python -m venv myenv (Windows)
-  source myenv/bin/activate (Linux) / myenv\Scripts\activate
+  - pip install virtualenv
+  - python3 -m venv myenv (Linux) / python -m venv myenv (Windows)
+  - source myenv/bin/activate (Linux) / myenv\Scripts\activate
 # Comandos en ambiente virtual
   pip install python3 --upgrade
   pip install -r requirements.txt
