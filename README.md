@@ -11,7 +11,7 @@
   - python3 manage.py runserver (puerto opcional)
 ---
 Recuerda para subir cambios a Git debes sacar el modo ambiente virtual
-# deactivate
+  - deactivate (para salir del ambiente virtual)
 ---
 Default user created
   user: blossom
