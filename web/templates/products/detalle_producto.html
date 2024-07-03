@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'web/css/productDetail.css' %}">
+    <div class="container p-4" id="container-ref">
+    </div>
+
+    <div class="container p-4" id="infoProduct">
+    </div>
+    <script src="{% static 'web/js/productoDetalle.js' %}" type="module"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock %}

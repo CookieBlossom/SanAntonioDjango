@@ -1,0 +1,45 @@
+
+#loadProducts {
+    display: flex;
+    justify-content: center;
+}
+#loadProducts .card{
+    display: flex;
+    padding: 0px;
+    border-style: none;
+    align-items: center;
+}
+#loadProducts .card-body{
+    padding: 10px 0px;
+}
+#loadProducts img{
+    padding: 15px;
+    height: 300px;
+}
+#productsSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+#productsSection h3{
+    text-align: center;
+    margin: 0;
+    font-family: sans-serif;
+    color: black;
+    font-weight: bolder;
+}
+
+#loadMoreBtn {
+    font-weight: bold;
+}
+
+#container-filters {
+    display: flex;
+    justify-content: space-around;
+}
+
+#productsFilter {
+    display: flex;
+    align-items: center;
+}

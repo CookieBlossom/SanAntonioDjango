@@ -20,8 +20,6 @@ const createCategories = (data) => {
     });
 }
 
-
-
 const createBrands = (data) => {
     const location = document.getElementById("showBrands");
 

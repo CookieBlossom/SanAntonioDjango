@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth import get_user_model
-from web.models import Product
+from web.models import Product, Size
 User = get_user_model()
 
 class ShoppingCart(models.Model):
@@ -17,8 +17,9 @@ class ShoppingCart(models.Model):
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     price = models.FloatField()
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.product}'

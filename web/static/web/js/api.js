@@ -39,6 +39,19 @@ export const getCategories = async() => {
 
 }
 
+export const getSizes = async() => {
+    try{
+
+        const response = await fetch(`${API_BASE_URL}/web/api/sizes/`);
+        const data = await response.json();
+
+        return data;
+    }catch(error){
+        console.log(`El error es: ${error}`);
+    }
+
+}
+
 export const getProductsData = async() => {
     try{
 
