@@ -51,35 +51,10 @@ def finalizar_compra(request):
         carrito_items.delete()
     
     return redirect('home')
-
 @login_required
 def products(request):
-    user = request.user
-    context = {
-        'user': user,
-    }
-    return render(request, 'products/products.html', context)
-
-def get_products_data(request):
-    products = Product.objects.all()
-    categories = Category.objects.all()
-    brands = Brand.objects.all()
-    
-    products_data = list(products.values())
-    categories_data = list(categories.values())
-    brands_data = list(brands.values())
-    
-    data = {
-        'products': products_data,
-        'categories': categories_data,
-        'brands': brands_data
-    }
-    
-    return JsonResponse(data, safe=False)
-
-def get_products(request):
-    product = Product.objects.all()
-    data = list(product.values())  # Convertir queryset a lista de diccionarios
+    productos = Product.objects.all()
+    data = list(productos.values())
     return JsonResponse(data, safe=False)
 
 def get_brands(request):
