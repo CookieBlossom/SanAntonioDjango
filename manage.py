@@ -1,11 +1,7 @@
-#!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
 import os
 import sys
 
-
 def main():
-    """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sanantonio.settings')
     try:
         from django.core.management import execute_from_command_line
@@ -15,8 +11,12 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    execute_from_command_line(sys.argv)
 
+    if 'runserver' in sys.argv and not any(arg.startswith('0.0.0.0:') for arg in sys.argv):
+        port = os.environ.get('PORT', '8000')
+        sys.argv.append(f'0.0.0.0:{port}')
+    
+    execute_from_command_line(sys.argv)
 
 if __name__ == '__main__':
     main()
