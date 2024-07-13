@@ -12,14 +12,9 @@ class CustomLoginView(LoginView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Extraer solo partes serializables del contexto para depuración
-        serializable_context = {key: str(value) for key, value in context.items() if isinstance(value, (str, int, float, list, dict))}
-        print("Contexto de login (serializable):", serializable_context)  # Depuración
+        # Puedes mantener el print para depuración, pero no es necesario
+        print("Contexto de login:", context)  # Depuración
         return context
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data()
-        return JsonResponse({"status": "context processed"})  # Confirmar que el contexto fue procesado sin mostrar todo el contexto
 
 @login_required
 def home(request):
