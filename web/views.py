@@ -12,10 +12,12 @@ class CustomLoginView(LoginView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Puedes mantener el print para depuración, pero no es necesario
-        print("Contexto de login:", context)  # Depuración
+        # Filtrar solo las claves y valores que son serializables
+        serializable_context = {k: v for k, v in context.items() if isinstance(v, (str, int, float, list, dict))}
+        print("Contexto de login (serializable):", serializable_context)  # Depuración
         return context
-
+    
+    
 @login_required
 def home(request):
     if request.user.is_authenticated:
