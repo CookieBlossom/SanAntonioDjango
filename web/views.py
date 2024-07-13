@@ -4,8 +4,8 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Product, Category, Brand, Size
 
-
 from django.contrib.auth.views import LoginView
+import json
 
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
@@ -14,10 +14,10 @@ class CustomLoginView(LoginView):
         context = super().get_context_data(**kwargs)
         # Filtrar solo las claves y valores que son serializables
         serializable_context = {k: v for k, v in context.items() if isinstance(v, (str, int, float, list, dict))}
-        print("Contexto de login (serializable):", serializable_context)  # Depuración
+        print("Contexto de login (serializable):", json.dumps(serializable_context, indent=4))  # Depuración
         return context
     
-    
+ 
 @login_required
 def home(request):
     if request.user.is_authenticated:
