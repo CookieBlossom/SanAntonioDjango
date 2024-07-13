@@ -6,19 +6,20 @@ from .models import Product, Category, Brand, Size
 
 
 from django.contrib.auth.views import LoginView
+
 class CustomLoginView(LoginView):
     template_name = 'accounts/login.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print("Contexto de login:", context)  # Depuración
+        # Extraer solo partes serializables del contexto para depuración
+        serializable_context = {key: str(value) for key, value in context.items() if isinstance(value, (str, int, float, list, dict))}
+        print("Contexto de login (serializable):", serializable_context)  # Depuración
         return context
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data()
-        return JsonResponse(context)  # Devuelve el contexto como JSON para depurar
-
-
+        return JsonResponse({"status": "context processed"})  # Confirmar que el contexto fue procesado sin mostrar todo el contexto
 
 @login_required
 def home(request):
