@@ -10,8 +10,4 @@ urlpatterns = [
     path('web/', include('web.urls')),  # Reemplaza 'accounts.urls' con el nombre de tu aplicación y archivo 'urls.py'
 ]
 
-# Configuración para servir archivos estáticos durante el desarrollo
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

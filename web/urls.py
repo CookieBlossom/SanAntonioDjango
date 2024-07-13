@@ -3,7 +3,6 @@ from .views import products, agregar_al_carrito, get_products_data, get_products
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name='login'),
-  # Utiliza la vista personalizada o la predeterminada
     path('products/', products, name="products"),
     path('api/agregar-al-carrito/<int:producto_id>/<int:quantity>/<int:size_name>/', agregar_al_carrito, name='agregar_al_carrito'),
     path('api/productsData/', get_products_data, name="get_products_data"),
