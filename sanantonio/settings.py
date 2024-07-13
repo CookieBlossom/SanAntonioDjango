@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'pedido',
     'carrito',
     'crispy_forms',
-    'crispy_bootstrap4',    
+    'crispy_bootstrap4',  
+    'django-extensions',  
 ]
 
 MIDDLEWARE = [
