@@ -5,25 +5,45 @@ from django.contrib.auth.decorators import login_required
 from .models import Product, Category, Brand, Size
 
 
+from django.contrib.auth.views import LoginView
+class CustomLoginView(LoginView):
+    template_name = 'accounts/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print("Contexto de login:", context)  # Depuración
+        return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        return JsonResponse(context)  # Devuelve el contexto como JSON para depurar
+
+
+
 @login_required
 def home(request):
-    user = request.user
-    
-    try:
-        carrito_db = ShoppingCart.objects.get(user=user)
-    except ShoppingCart.DoesNotExist:
-        carrito_db = ShoppingCart.objects.create(user=user)
-    
-    carrito_items = CartItem.objects.filter(user=user)
-    total_carrito = sum(item.total_price for item in carrito_items)
+    if request.user.is_authenticated:
 
-    context = {
-        'user': user,
-        'carrito_db': carrito_db,
-        'carrito_items': carrito_items,
-        'total_carrito': total_carrito,
-    }
-    return render(request, 'web/home.html', context)
+        user = request.user
+        
+        try:
+            carrito_db = ShoppingCart.objects.get(user=user)
+        except ShoppingCart.DoesNotExist:
+            carrito_db = ShoppingCart.objects.create(user=user)
+        
+        carrito_items = CartItem.objects.filter(user=user)
+        total_carrito = sum(item.total_price for item in carrito_items)
+
+        context = {
+            'user': user,
+            'carrito_db': carrito_db,
+            'carrito_items': carrito_items,
+            'total_carrito': total_carrito,
+        }
+        return render(request, 'web/home.html', context)
+    return {}
+
+
 @login_required
 def agregar_al_carrito(request, producto_id, quantity, size_name):
     user = request.user
