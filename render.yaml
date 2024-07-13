@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: sanantoniodjango
+    env: python
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
+    startCommand: "gunicorn sanantoniodjango.wsgi:application --bind 0.0.0.0:8000"
+    staticPublishPath: staticfiles  # Publicar archivos estáticos desde esta ruta
+    routes:
+      - type: static
+        name: media
+        path: /media/*     # Servir archivos de medios desde esta ruta
+        src: media    

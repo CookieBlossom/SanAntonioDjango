@@ -1,9 +1,5 @@
-
-
 import os
-from pathlib import Path
 from django.contrib.messages import constants as mensaje_de_error
-from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
@@ -37,7 +33,6 @@ INSTALLED_APPS = [
     'carrito',
     'crispy_forms',
     'crispy_bootstrap4',    
-    'django_extensions',
 ]
 
 MIDDLEWARE = [
