@@ -119,15 +119,15 @@ USE_TZ = True
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
-
+LOGOUT_REDIRECT_URL = 'login'
 # Configuración de archivos estáticos y medios
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'web/static'),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'

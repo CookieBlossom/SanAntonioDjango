@@ -20,10 +20,9 @@ const saleSection = (products) => {
 
     locationSale.appendChild(stockP);
     locationSale.appendChild(saleText);
-
 };
 
-// Funcion para mostrar todos los productos en el DOM
+// Función para mostrar todos los productos en el DOM
 const showAllProducts = (results = []) => {
     if (results.length > 0) {
         results.forEach(product => {
@@ -31,6 +30,7 @@ const showAllProducts = (results = []) => {
             const name = product.name.toUpperCase();
             const stock = product.quantity;
             const price = product.price;
+            const imageUrl = product.image_url;
 
             const row = document.createElement("div");
             row.classList.add("row");
@@ -41,7 +41,7 @@ const showAllProducts = (results = []) => {
             card.classList.add("card");
 
             const img = document.createElement("img");
-            img.src = `../media/${product.image}`;
+            img.src = imageUrl;
             img.classList.add("card-img-top");
 
             const cardBody = document.createElement("div");
@@ -74,6 +74,7 @@ const showAllProducts = (results = []) => {
         location.reload();
     }
 };
+
 // Función para mostrar productos por 5 en el DOM
 const showProducts = (results = [], startIndex) => {
     const endIndex = startIndex + itemPage;
@@ -84,6 +85,7 @@ const showProducts = (results = [], startIndex) => {
             const name = product.name.toUpperCase();
             const stock = product.quantity;
             const price = product.price;
+            const imageUrl = product.image_url;
 
             const row = document.createElement("div");
             row.classList.add("row");
@@ -94,7 +96,7 @@ const showProducts = (results = [], startIndex) => {
             card.classList.add("card");
 
             const img = document.createElement("img");
-            img.src = `../media/${product.image}`;
+            img.src = imageUrl;
             img.classList.add("card-img-top");
 
             const cardBody = document.createElement("div");
@@ -128,8 +130,6 @@ const showProducts = (results = [], startIndex) => {
     }
     return endIndex;
 };
-
-// Función para cargar más productos
 const loadMoreProducts = () => {
     startIndex += itemPage;
     showProducts(loadedProducts, startIndex);
@@ -141,7 +141,6 @@ const loadMoreProducts = () => {
 
 loadMoreButton.addEventListener("click", loadMoreProducts);
 
-// Función para mapear productos con marcas y categorías
 function mapProducts(products, brands, categories) {
     const brandMap = {};
     const categoryMap = {};
@@ -151,15 +150,18 @@ function mapProducts(products, brands, categories) {
     categories.forEach(category => {
         categoryMap[category.id] = category.name;
     });
-    const mappedProducts = products.map(product => ({
-        ...product,
-        brand_name: brandMap[product.brand_id],
-        category_name: categoryMap[product.category_id]
-    }));
+    const mappedProducts = products.map(product => {
+        const brandName = brandMap[product.brand_id];
+        const categoryName = categoryMap[product.category_id];
+        return {
+            ...product,
+            brand_name: brandName,
+            category_name: categoryName
+        };
+    });
 
     return mappedProducts;
 }
-
 getProductsData()
     .then((data) => {
         const results = mapProducts(data.products, data.brands, data.categories);
@@ -168,7 +170,7 @@ getProductsData()
         saleSection(results);
 
         // Generar opciones de filtro por marca usando jQuery y Bootstrap
-        const dropdownMenu = $('#brandsDropdownMenu');// Selección con jQuery
+        const dropdownMenu = $('#brandsDropdownMenu');  // Selección con jQuery
         data.brands.forEach(brand => {
             const option = $('<li>');
             const link = $('<a>');
@@ -179,6 +181,7 @@ getProductsData()
             link.on('click', function(event) {
                 event.preventDefault();
                 const brandId = $(this).data('brandId');
+
                 if (brandId) {
                     const filteredProducts = results.filter(product => product.brand_id == brandId);
                     locationProducts.innerHTML = '';

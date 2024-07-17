@@ -2,7 +2,6 @@ import { getProductsData, getSizes } from "./api.js";
 
 const url = window.location.href;
 const productId = url.match(/\/detalle-producto\/(\d+)\//)[1];
-// Objeto para almacenar la selección del usuario
 let cartItem = {
     quantity: null,
     size: null,
@@ -36,8 +35,8 @@ if (productId) {
         const price = results.price;
         const brand = results.brand_name;
         const stock = results.quantity;
-        const url = results.image;
-
+        const url = results.image_url;
+        console.log(url);
         const row = document.createElement("div");
         row.classList.add("row");
 
@@ -45,7 +44,7 @@ if (productId) {
         col.classList.add("col");
 
         const image = document.createElement("img");
-        image.src = `/media/${url}`;
+        image.src = url;
         image.classList.add("w-100");
         image.classList.add("h-100");
 
@@ -78,6 +77,7 @@ if (productId) {
         const dropdownButton = document.createElement("button");
         dropdownButton.classList.add("btn", "btn-secondary", "dropdown-toggle");
         dropdownButton.type = "button";
+        dropdownButton.id = "sizeDropdownButton"; // Asignar ID
         dropdownButton.setAttribute("data-bs-toggle", "dropdown");
         dropdownButton.setAttribute("aria-expanded", "false");
         dropdownButton.textContent = "Tallas";
@@ -95,6 +95,7 @@ if (productId) {
         const quantityDropdownButton = document.createElement("button");
         quantityDropdownButton.classList.add("btn", "btn-secondary", "dropdown-toggle");
         quantityDropdownButton.type = "button";
+        quantityDropdownButton.id = "quantityDropdownButton"; // Asignar ID
         quantityDropdownButton.setAttribute("data-bs-toggle", "dropdown");
         quantityDropdownButton.setAttribute("aria-expanded", "false");
         quantityDropdownButton.textContent = "Cantidad";
@@ -115,11 +116,12 @@ if (productId) {
             link.textContent = i;
             link.dataset.quantity = i;
 
-            quantityDropdownMenu.addEventListener('click', function(event) {
+            link.addEventListener('click', function(event) {
                 event.preventDefault();
                 const selectedQuantity = parseInt(event.target.dataset.quantity);
                 cartItem.quantity = selectedQuantity;
                 console.log(`Seleccionada cantidad: ${selectedQuantity}`);
+                quantityDropdownButton.textContent = `Cantidad: ${selectedQuantity}`;
             });
 
             option.appendChild(link);
@@ -132,7 +134,6 @@ if (productId) {
         addToCartButton.textContent = "Agregar al Carrito";
         addToCartButton.addEventListener('click', function() {
             if (cartItem.quantity !== null && cartItem.size !== null) {
-                console.log(`Producto agregado al carrito: ${cartItem.quantity}, ${cartItem.size}, ${cartItem.id}`);
                 const data = {
                     quantity: cartItem.quantity,
                     size: cartItem.size,
@@ -154,11 +155,11 @@ if (productId) {
                     if (!response.ok) {
                         throw new Error('Error al agregar al carrito');
                     }
-                    return response.json(); // Si esperas una respuesta JSON del servidor
+                    return response.json();
                 })
                 .then(data => {
-                    console.log('Producto agregado exitosamente:', data);
-                    // Aquí puedes manejar la respuesta del servidor, como actualizar la interfaz o redirigir
+                    alert('Producto agregado exitosamente');
+                    location.reload();
                 })
                 .catch(error => {
                     console.error('Error al agregar al carrito:', error);
@@ -167,22 +168,7 @@ if (productId) {
                 console.error('Debe seleccionar cantidad y talla antes de agregar al carrito');
             }
         });
-        
-        
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.startsWith(name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
+
         colBody.appendChild(title);
         colBody.appendChild(productInfo);
         colBody.appendChild(selecterInfo);
@@ -199,11 +185,10 @@ if (productId) {
             const product = results.find(product => product.id === parseInt(productId));
 
             loadInformation(product);
-
-            // Cargar tallas dinámicamente
             getSizes()
                 .then((sizes) => {
                     const dropdownMenu = document.querySelector('#sizeDropdownMenu');
+                    const dropdownButton = document.querySelector('#sizeDropdownButton'); // Definir dropdownButton por ID
 
                     sizes.forEach(size => {
                         const option = document.createElement('li');
@@ -213,18 +198,17 @@ if (productId) {
                         link.textContent = size.size_name;
                         link.dataset.sizeId = size.id;
 
-                        dropdownMenu.addEventListener('click', function(event) {
+                        link.addEventListener('click', function(event) {
                             event.preventDefault();
                             const selectedSize = event.target.textContent;
                             cartItem.size = selectedSize;
                             console.log(`Seleccionada talla: ${selectedSize}`);
+                            dropdownButton.textContent = `Talla: ${selectedSize}`;  // Actualizar el texto del botón
                         });
 
                         option.appendChild(link);
                         dropdownMenu.appendChild(option);
                     });
-
-                    // Activar dropdowns de Bootstrap
                     const dropdownToggleButtons = document.querySelectorAll('.dropdown-toggle');
                     dropdownToggleButtons.forEach(button => new bootstrap.Dropdown(button));
 

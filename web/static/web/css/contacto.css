@@ -1,0 +1,22 @@
+body{
+    font-family: 'Ubuntu', 'Arial Narrow', Arial, sans-serif;;
+    background-color: #f0eded;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.container{
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.container-fluid{
+    padding: 20px;
+}
+h2{
+    margin: 0;
+    text-align: center;
+}

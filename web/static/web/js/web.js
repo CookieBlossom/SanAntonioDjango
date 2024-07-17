@@ -3,7 +3,6 @@ import { getBrands, getCategories } from "./api.js";
 const createCategories = (data) => {
     let location = document.getElementById("showCategories");
     data.forEach( element => {
-        console.log(element);
         const divCol = document.createElement("div");
         divCol.classList.add("row"); 
 
@@ -56,7 +55,6 @@ const createBrands = (data) => {
 
 getBrands()
     .then((brands) => {
-        console.log(brands);
         createBrands(brands);
     })
     .catch((error)=> {
@@ -65,7 +63,6 @@ getBrands()
 
 getCategories()
 .then((category) => {
-    console.log(category);
     createCategories(category);
 })
 .catch((error)=> {

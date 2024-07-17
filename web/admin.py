@@ -20,5 +20,5 @@ class ProductAdmin(admin.ModelAdmin):
     filter_horizontal = ('size',)
     
 @admin.register(Contacto)
-class ContactoAdmin (admin.ModelAdmin)
-    list_display = ('Contacto')
+class ContactoAdmin (admin.ModelAdmin):
+    list_display = ('nombre', 'tipo_consulta', 'correo', 'mensaje')

@@ -20,21 +20,25 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav navbar-left">
+                        <ul class="navbar-nav navbar-left" id="navbar-left">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a>
+                                <a class="nav-link active" aria-current="page" href="{% url 'home' %}">
+                                    <img src="{% static 'web/images/home.png' %}" alt="" >
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'login' %}">Usuario</a>
+                                <a class="nav-link" href="{% url 'login' %}">
+                                    <img src="{% static 'web/images/user.png'%}" alt="">
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'products' %}">Productos</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav navbar-right">
+                        <ul class="navbar-nav navbar-right" id="navbar-right">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCart" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Carrito de Compras
+                                    <img src="{% static 'web/images/shopping_cart.png' %}" alt="" >
                                     <span class="badge bg-secondary">
                                         {% if carrito_items %}
                                             {{ carrito_items|length }}
@@ -43,7 +47,7 @@
                                         {% endif %}
                                     </span>
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCart">
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCart" id="carritoMenu">
                                     {% if carrito_items %}
                                         {% for item in carrito_items %}
                                             <li>
@@ -60,6 +64,7 @@
                                                     Total: ${{ item.total_price }}
                                                 </a>
                                             </li>
+                                            <br>
                                         {% endfor %}
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="#">Total: ${{ total_carrito }}</a></li>
@@ -70,9 +75,14 @@
                             </li>
                             <li class="nav-item">
                                 {% if user.is_authenticated %}
-                                    Hola {{user}} &nbsp;&nbsp; <a href="#" style="color:white;">Cerrar sesión</a>
+                                    Hola {{ user }} &nbsp;&nbsp; 
+                                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" style="background: none; border: none; padding: 0; color: rgb(0, 0, 0); cursor: pointer;">Cerrar sesión</button>
+                                    </form>
                                 {% else %}
-                                    <a href="{% url 'login' %}" style="color:white;">Login</a> &nbsp;&nbsp; <a href="" style="color:white;">Registrate</a>
+                                    <a href="{% url 'login' %}" style="color:rgb(0, 0, 0);">Login</a> &nbsp;&nbsp; 
+                                    <a href="{% url 'register' %}" style="color:rgb(0, 0, 0);">Regístrate</a>
                                 {% endif %}
                             </li>
                         </ul>
@@ -115,6 +125,9 @@
                                 </div>
                             </div>
                         </div>
+                    </section>
+                    <section class="mb-4">
+                        <a href="{% url 'contacto' %}" id="contactSection">Contactenos</a>
                     </section>
                 </div>
                 <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">

@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #9e9a9a;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,6 +9,8 @@ body {
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
     width: 90%;
     max-width: 600px;
     background-color: #fff;
@@ -17,7 +19,8 @@ body {
     border-radius: 8px;
 }
 
-h2 {
+
+h1{
     text-align: center;
     margin-bottom: 20px;
     color: #333;
@@ -50,15 +53,23 @@ input[type="submit"]:hover {
 }
 
 a {
-    color: #007bff;
     text-decoration: none;
-    display: block;
     margin-bottom: 10px;
 }
 
 a:hover {
     text-decoration: underline;
 }
+
+button{
+    font-size: 20px;
+    background-color: white;
+}
+label{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+}
+
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {

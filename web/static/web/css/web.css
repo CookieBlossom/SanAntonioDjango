@@ -94,7 +94,45 @@
 .row{
     margin: 0;
 }
+#navbar-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+#navbar-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar-right img{
+    padding: 0;
+    width: 40px;
+}
+
+#navbar-left img{
+    padding: 0;
+    width: 30px;
+}
+#navbarSupportedContent{
+    justify-content: space-between;
+}
+
+.nav-item a{
+    text-decoration: none;
+}
+#carritoMenu{
+    font-family: monospace;
+}
+
+#contactSection{
+    color: black;
+    font-family: ui-monospace;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 19px;
+}
 @media (min-width: 768px) {
     .navbar-expand-md .navbar-collapse {
         display: flex !important;
