@@ -3,6 +3,9 @@ from carrito.models import ShoppingCart, CartItem
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import Product, Category, Brand, Size
+from .forms import ContactoForm
+from .forms import CustomUserCreationForm
+from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.views import LoginView
 import json
@@ -118,3 +121,35 @@ def get_sizes(request):
     size = Size.objects.all()
     data = list(size.values())
     return JsonResponse(data, safe=False)
+
+def Contacto (request):
+    data {
+        'form': ContactoForm()
+    }
+    if request.method == 'POST':
+        formulario = ContactoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "contacto guardado exitosamente"
+        else:
+            data["form"] = formulario
+    return render(request, web/contacto.)
+
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+    
+    if request.method == 'post':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
+            login (request, user)
+            messages.success(request,"Registro correcto")
+            #redirigir al home 
+            return redirect(to= "home")
+        data ["form"]= formulario
+            
+            
+    return render(request, 'acounts/register.html', data)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Brand, Category, Size
+from .models import Product, Brand, Category, Size,Contacto
 # Register your models here.
 
 @admin.register(Brand)
@@ -18,3 +18,7 @@ class SizeAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'price', 'quantity', 'brand', 'category', 'genre')
     filter_horizontal = ('size',)
+    
+@admin.register(Contacto)
+class ContactoAdmin (admin.ModelAdmin)
+    list_display = ('Contacto')
